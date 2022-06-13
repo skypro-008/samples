@@ -8,7 +8,7 @@ from user_model import UserModel
 app = Flask(__name__)
 
 # Закидываем настройки, которые скоро использует алхимия
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Связываем базу данных и приложение
@@ -19,16 +19,17 @@ db.init_app(app)
 
 app.app_context().push()
 
-# Создаем все таблицы
-# В реальном коде это нужно вынести
-db.create_all()
+# Вьюшка для демонстрации содержания базы
 
-# Добавляем экземплярку модели
-user_1 = UserModel(pk=1, first_name="Jane", last_name="Doe")
+@app.route("/")
+def page_show():
 
-# Пишем в базу
-db.session.add(user_1)
-db.session.commit()
+    # Получаем данные из таблички
+    users = UserModel.query.all()
+    # Показываем во вьюшке
+    return "<br/>".join([f"{u.pk}  {u.first_name}  {u.last_name}" for u in users])
+
+# Запускаем приложение тут
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=4000)
