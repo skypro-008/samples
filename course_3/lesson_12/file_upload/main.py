@@ -1,5 +1,11 @@
-import os
+# Демонстрация двух способов сохранения файла из формы
 
+# Запусти приложение.
+# Перейди к форме.
+# Отправь файл.
+# Загляни в папку uploads
+
+import os
 from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
@@ -8,11 +14,11 @@ template = """
 
 <form action="/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="the_file">
+    <input type="checkbox" name="use_dot"> Добавить точку
     <input type="submit" value="Отправить файл">
 </form>
 
 """
-
 
 @app.route('/')
 def index():
@@ -25,8 +31,10 @@ def upload_file():
         f = request.files['the_file']
         filename = f.filename
 
-        f.save(os.path.join("uploads", f"nodot_{filename}"))\
-        f.save(os.path.join(".", "uploads", f"dot_{filename}"))
+        if request.values.get("use_dot", False):
+            f.save(os.path.join(".", "uploads", f"dot_{filename}"))
+        else:
+            f.save(os.path.join("uploads", f"nodot_{filename}"))
         return "saved"
 
 
