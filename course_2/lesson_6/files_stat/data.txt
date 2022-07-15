@@ -1,0 +1,5 @@
+fists  100
+second  200
+third  300
+fourth  400
+fifth  500
