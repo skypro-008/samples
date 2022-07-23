@@ -25,13 +25,15 @@ def index_bp_1():
 def index_bp_2():
     return "Второй уровень"
 
+print(type(index_bp_2))
+
 bp_parent.register_blueprint(bp_child, url_prefix="/two")
 app.register_blueprint(bp_parent, url_prefix="/one")
 
 
-print(app.url_map)
+# print(app.url_map)
 
 
 
 if __name__ == '__main__':
-    app.run( debug=True, port=8000)
+    app.run( debug=True, port=8080)
