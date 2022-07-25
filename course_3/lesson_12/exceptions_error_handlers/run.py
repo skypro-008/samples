@@ -23,17 +23,17 @@ def page_2():
 
 @app.errorhandler(404)
 def page_404(error):
-    return "Страница не найдена на нашем сервере", 404
+    return f"Страница не найдена на нашем сервере: {error}", 404
 
 
 @app.errorhandler(UnderConstructionError)
 def page_under_construction(error):
-    return "Страница находится на доработке", 403
+    return f"Страница находится на доработке: {error}", 403
 
 
 @app.errorhandler(NotImplementedPageError)
 def page_under_construction(error):
-    return "Страница еще готова", 403
+    return f"Страница еще готова {error}", 403
 
 
 app.run(debug=True)
