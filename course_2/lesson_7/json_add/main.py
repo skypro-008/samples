@@ -11,7 +11,7 @@ def read_from_json(filename):
 def save_to_json(filename, data):
     """ сохраняет данные из списка словарей в JSON строку"""
     with open(filename, "w", encoding="utf-8") as file:
-        data = json.dump(data, file)
+        json.dump(data, file)
     return data
 
 
@@ -20,6 +20,7 @@ def add_to_json(filename, new_element):
     data = read_from_json(filename)
     data.append(new_element)
     save_to_json(filename, data)
+
 
 # А теперь небольшой пример с добавлением кота в список километров
 
@@ -32,5 +33,3 @@ new_cat = {"name": user_input}
 add_to_json(filename, new_cat)
 
 print("Кот добавлен")
-
-
