@@ -1,7 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
-
 
 app = Flask(__name__)
 
@@ -50,5 +49,5 @@ db.session.commit()
 
 order = db.session.query(OrderModel).get(1)
 
-print(order.owner)
+print(order.owner.get("first_name"))
 print(order.performer)
