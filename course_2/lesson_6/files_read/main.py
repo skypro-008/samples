@@ -1,10 +1,10 @@
 filename = "data.txt"
 f = open(filename, "r")
 
-name = f.readline().replace("\n", "")
-surname = f.readline().replace("\n", "")
-email = f.readline().replace("\n", "")
-phone = f.readline().replace("\n", "")
+name = f.readline().strip()
+surname = f.readline().strip()
+email = f.readline().strip()
+phone = f.readline().strip()
 
 print(name)
 print(surname)
