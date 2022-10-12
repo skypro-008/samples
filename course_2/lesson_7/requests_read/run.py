@@ -1,11 +1,14 @@
+# Импортируем библиотеку
 import requests as requests
 
-source_url = "https://jsonkeeper.com/b/O8MV"
+# Задаем путь к файлу
+source_url = "https://api.npoint.io/c5b249352f0d87037214!"
+# Выполняем запрос
 result = requests.get(source_url)
-words = result.json()
 
-# Дальше можно работать со словами
+if result.status_code == 200:
+    print(result.json())
+else:
+    print("Ошибка при доступе")
 
-word = words[0]
-
-print(word)
+a = None
