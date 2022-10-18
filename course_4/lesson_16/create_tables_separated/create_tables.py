@@ -6,6 +6,7 @@ from user_model import UserModel
 
 from data_to_import import LIST_OF_USERS
 
+
 # Удаляем и заново создаем таблицы
 db.drop_all()
 db.create_all()

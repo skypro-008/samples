@@ -21,6 +21,7 @@ app.app_context().push()
 
 # Создаем все таблицы
 # В реальном коде это нужно вынести
+db.drop_all()
 db.create_all()
 
 # Добавляем экземплярку модели
@@ -30,5 +31,4 @@ user_1 = UserModel(pk=1, first_name="Jane", last_name="Doe")
 db.session.add(user_1)
 db.session.commit()
 
-if __name__ == '__main__':
-    app.run(debug=True)
+print(user_1)
