@@ -1,9 +1,8 @@
-from pprint import pprint as pp
-
 import json
 
-from exceptions import DataFileError
-from post import Post
+from posts.exceptions import DataFileError
+from posts.post import Post
+
 
 class PostsDAO:
 
@@ -11,7 +10,10 @@ class PostsDAO:
         self.path = path
 
     def _load(self):
-
+        """
+        Служебный метод, загружает данные из файла и возвращает их
+        :return:
+        """
         try:
             with open(self.path, "r", encoding="utf-8") as file:
                 posts_data = json.load(file)
@@ -23,12 +25,16 @@ class PostsDAO:
         return posts
 
     def get_all(self):
+        """
+        Возвращает все посты из списка
+        :return:
+        """
         posts = self._load()
         return posts
 
     def get_by_pk(self, pk):
         """
-        Получаем  пост по его pk
+        Возвращает  пост по его pk
         """
 
         if type(pk) != int:
@@ -41,7 +47,7 @@ class PostsDAO:
 
     def get_by_poster_name(self, name):
         """
-        Получаем список постов по имени пользователя
+        Возврашщает список постов по имени пользователя
         """
 
         if type(name) != str:
@@ -54,7 +60,7 @@ class PostsDAO:
 
     def search_in_content(self, substring):
         """
-        Ищем текст в контенте постов и возвращаем подходящие посты
+        Ищет текст в контенте постов и возвращает подходящие посты
         """
 
         if type(substring) != str:
@@ -63,9 +69,8 @@ class PostsDAO:
         substring = substring.lower()
         posts = self._load()
         matching_posts = [post for post in posts if substring in post.content.lower()]
+
         return matching_posts
 
 
-posts_dao = PostsDAO("../data/posts_data.json")
 
-pp(posts_dao._load())
