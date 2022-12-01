@@ -22,15 +22,18 @@ class User(db.Model):
         return f"User({self.pk},{self.name}, {self.genre})"
 
 
+# Здесь мы создаем модель
 class Genre(db.Model):
 
     pk = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
 
+    # здесь необходимый метод repr
     def __repr__(self):
         return f"Genre({self.pk},{self.name})"
 
 
+# Здесь мы тестируем
 genre_1 = Genre(pk=1, name="action")
 user_1 = User(pk=1,name="a", genre=genre_1)
 
