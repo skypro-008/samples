@@ -9,7 +9,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-
 class UserModel(db.Model):
     """Модель пользователя"""
     __tablename__ = 'user'

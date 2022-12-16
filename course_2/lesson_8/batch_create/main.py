@@ -43,10 +43,28 @@ products_data = [
 
 def create_instances_from_dict(data_dict):
 
-    products = [Product(**product_data) for product_data in data_dict]
+    # заводим список с продуктами
+    products = []
+
+    for product_data in data_dict:
+        # создаем экземпляр продукта
+        product_instance = Product(
+            product_data["icon"],
+            product_data["name"],
+            product_data["cat"],
+            product_data["kcal"]
+        )
+        # добавляем экземпляр продукта в список
+        products.append(product_instance)
+
+    # возвращаем в список
     return products
 
-create_instances_from_dict(products_data)
+# тестируем
+products_in_list = create_instances_from_dict(products_data)
+print(products_in_list)
+
+
 
 
 
