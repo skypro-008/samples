@@ -9,6 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+
 class UserModel(db.Model):
     """Модель пользователя"""
     __tablename__ = 'user'
@@ -17,17 +18,17 @@ class UserModel(db.Model):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String, nullable=True)
 
+
+# Все оборачиваем в контекст
 with app.app_context():
+    # Пересоздаем базу данных
     db.drop_all()
     db.create_all()
 
-    # Пересоздаем базу данных
-
-    #
     # # Создаем пользователей
     user_1 = UserModel(pk=1, first_name="Алиса")
     user_2 = UserModel(pk=2, first_name="Денис")
-    #
-    # # Загружаем все в базу данных
+
+    #  Загружаем все в базу данных
     db.session.add_all([user_1, user_2])
     db.session.commit()
