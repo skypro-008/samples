@@ -17,6 +17,16 @@ class Product:
         self.cat = cat
         self.kcal = kcal
 
+    def dict(self) -> dict:
+
+        result = {
+            "name": self.name.title(),
+            "cat": self.cat.lower(),
+            "kcal": self.kcal,
+        }
+
+        return result
+
     def __repr__(self):
         return f"Product(" \
                f"{self.icon}," \
@@ -70,8 +80,11 @@ def create_products_from_data(data):
 
 result = create_products_from_data(products_data)
 
-print(result)
-#
+product_dict = result[0].dict()
+
+print(product_dict)
+
+
 # def create_instances_from_dict(data_dict):
 #
 #     # заводим список с продуктами
