@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 
 logger = logging.getLogger("basic")
+
 logger.debug("Неважное сообщение")
 logger.warning("Запустились и работаем")
 
@@ -25,8 +26,23 @@ def get_next_pk(sequence):
     return new_pk
 
 
+@app.errorhandler(404)
+def page_error_404(error):
+
+    logger.error(f"Запрошена несуществущая страничка {request.url}")
+    return "Запрошена несуществующая страница", 404
+
+@app.errorhandler(500)
+def page_error_505(error):
+
+    logger.error(f"Ошибка при запросе {request.url}")
+    return "Запрошена несуществующая страница", 404
+
+
 @app.get('/students/')
 def api_get_all():
+    1/0
+    logger.debug("Запрошена страничка /students")
     return jsonify(students), 200
 
 
@@ -57,4 +73,4 @@ def api_add_post():
 
 
 if __name__ == '__main__':
-    app.run( )
+    app.run(port=5001)

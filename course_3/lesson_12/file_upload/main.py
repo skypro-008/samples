@@ -6,7 +6,7 @@
 # Загляни в папку uploads
 
 import os
-from flask import Flask, render_template_string, request
+from flask import Flask, render_template_string, request, send_from_directory
 
 app = Flask(__name__)
 
@@ -22,6 +22,9 @@ template = """
 
 @app.route('/')
 def index():
+    """
+    Вьюшка показывает форму
+    """
     return render_template_string(template)
 
 
@@ -35,7 +38,13 @@ def upload_file():
             f.save(os.path.join(".", "uploads", f"dot_{filename}"))
         else:
             f.save(os.path.join("uploads", f"nodot_{filename}"))
+
         return "saved"
 
 
-app.run()
+@app.get('/uploads/<path:path>')
+def show_uploaded(path):
+    return send_from_directory('uploads',path)
+
+
+app.run(port=8081)
