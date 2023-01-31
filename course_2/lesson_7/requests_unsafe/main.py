@@ -1,6 +1,8 @@
 import requests
+import urllib3
 
-result = requests.get("https://www.jsonkeeper.com/b/OTF8", verify = False)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+result = requests.get("https://jsonkeeper.com/b/OTF8", verify = False)
 
 data = result.json()
 
